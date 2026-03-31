@@ -1,69 +1,42 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
+class Main {
+  public static void main(String[] args) {
 
-public class Main {
-    public static void main(String[] args) {
-      System.out.println("Unsorted Array ---------------------------------------------------");
-      ArrayList<Integer> integerList = Lab4.getList();
-      Lab4.outputList(integerList);
-
-      System.out.println("\n\nBubble sort results ----------------------------------------------");
-      ArrayList<Integer> bubbleSortedList = Lab4.bubbleSort(integerList);
-      Lab4.outputList(bubbleSortedList);
-
-      System.out.println("\n\nInsertion sort results -------------------------------------------");
-      ArrayList<Integer> insertionSortedList = Lab4.insertionSort(integerList);  
-      Lab4.outputList(insertionSortedList);
+    // Step 1 - Create a BST tree object called lab5Tree
+    BST<Integer> lab5Tree = new BST<>();
+    // Step 2 - Insert the following values: 13, 22, 36, 5, 48, 17, 39, 2, 26, 40, 29, 34, 10
+    int[] values = {13, 22, 36, 5, 48, 17, 39, 2, 26, 40, 29, 34, 10};
+    for(int value : values) {
+        lab5Tree.insert(value);
     }
-}
-
-class Lab4 {
-  public static ArrayList<Integer> insertionSort(ArrayList<Integer> integerList) {
-    // Step 1 - Implement insertion sort algorithm here
-        for (int i = 1; i < integerList.size(); i++) {
-            int currentValue = integerList.get(i);
-            int j = i - 1;
-            while (j >= 0 && integerList.get(j) > currentValue) {
-                integerList.set(j + 1, integerList.get(j));
-                j--;
-            }
-            integerList.set(j + 1, currentValue);
-        }
-    return integerList;
-  }
-
-  public static ArrayList<Integer> bubbleSort(ArrayList<Integer> integerList) {
-    // Step 2 - Implement the bubble sort algorithm here
-    for (int i = 0; i < integerList.size() - 1; i++) {
-        for (int j = 0; j < integerList.size() - 1 - i; j++) {
-          if (integerList.get(j) > integerList.get(j + 1)) {
-              int temp = integerList.get(j)
-                    integerList.set(j, integerList.get(j + 1));
-                    integerList.set(j + 1, temp);
-              }
-          }
-        }
-    return integerList;
-  }
-
-  public static ArrayList<Integer> getList() {
-    ArrayList<Integer> integerList = new ArrayList<>();
-    String line;
-    try (BufferedReader br = new BufferedReader(new FileReader("integers.txt"))) {
-        while ((line = br.readLine()) != null) {
-            integerList.add(Integer.parseInt(line));
-        }
-    } catch (IOException e) {
-        e.printStackTrace();
+    // Step 3 - Delete the value 17
+    lab5Tree.delete(17);
+    // Step 4 - Traverse and output the values using inorder (sorted)
+    System.out.print("Inorder: ");
+    lab5Tree.inorder();
+    System.out.println();
+    // Step 5 - Traverse and output the values using postorder
+    System.out.print("Postorder: ");
+    lab5Tree.postorder();
+    System.out.println();
+    // Step 6 - Traverse and output the values using preorder
+    System.out.print("Preorder: ");
+    lab5Tree.preorder();
+    System.out.println();
+    // Step 7 - Display the result of a search for the value 36
+    System.out.println("Search for 36:" + lab5Tree.search(36));
+    // Step 8 - Display the result of a search for the value 37
+    System.out.println("Search for 36:" + lab5Tree.search(37));
+    // Step 9 - Using the path() method, display the path from the root to 2
+    System.out.print("Path to 2:");
+    for(BTS.TreeNode<Intege> node : lab5Tree.path(2)) {
+        System.out.print(node.element + " ");
     }
-    return integerList;
-  }
-
-  public static void outputList(ArrayList<Integer> integerList) {
-    for (int i = 0; i < integerList.size(); i++) {
-        System.out.print(integerList.get(i) + " ");
+    System.out.println();
+    // Step 10 - Display the path from the root to 34
+    System.out.print("Path to 34:");
+    for(BTS.TreeNode<Intege> node : lab5Tree.path(34)) {
+        System.out.print(node.element + " ");
     }
+    System.out.println();
   }
 }
